@@ -1,0 +1,34 @@
+{
+  "name": "gcc-mcp",
+  "version": "0.1.0",
+  "description": "Git Context Controller (GCC) as an MCP server — persistent, structured, cross-session memory for any MCP-compatible coding agent (Claude Code, Claude Desktop, Cursor, etc.), based on arXiv:2508.00031.",
+  "main": "index.js",
+  "bin": {
+    "gcc-mcp": "./index.js"
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-agent",
+    "memory",
+    "context",
+    "claude-code",
+    "cursor",
+    "git-context-controller"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "REPLACE_WITH_YOUR_GITHUB_URL"
+  }
+}
