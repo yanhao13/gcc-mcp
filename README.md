@@ -133,6 +133,43 @@ gcc_merge({ branch: "playwright", summary: "Playwright works reliably — use as
 gcc_context({})  →  reads main.md, sees playwright was merged, requests wasn't
 ```
 
+## Running remotely (Streamable HTTP)
+
+Everything above uses stdio, which is the right transport for local
+clients spawning the server as a subprocess. To run `gcc-mcp` as a shared
+service instead — one memory store multiple teammates' agents can hit —
+start it in Streamable HTTP mode:
+
+```bash
+node index.js --http --port=8000
+# or: PORT=8000 MCP_TRANSPORT=http node index.js
+```
+
+This exposes a single `POST /mcp` JSON-RPC endpoint (plus `GET /health`).
+Point a remote-capable client at it:
+
+```json
+{
+  "mcpServers": {
+    "gcc-memory": {
+      "url": "http://your-host:8000/mcp"
+    }
+  }
+}
+```
+
+Note: in HTTP mode, `.context/` is written relative to wherever the
+server process runs — pass an explicit `project_dir` argument on every
+tool call if multiple projects share one deployed server instance.
+
+### Docker
+
+```bash
+docker build -t gcc-mcp .
+docker run -d -p 8000:8000 --name gcc-mcp gcc-mcp
+curl http://localhost:8000/health
+```
+
 ## Publishing this yourself
 
 ```bash
